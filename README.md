@@ -24,32 +24,7 @@
 
 本專案於 Linux 環境搭建雙節點 Hadoop 集群，透過 HDFS 區塊分散存儲與 YARN 資源排程，達成平行運算加速：
 
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#F4F6F9', 'edgeLabelBackground':'#FFFFFF', 'primaryBorderColor': '#4B6B94', 'lineColor': '#5A738E'}}}%%
-flowchart LR
-    subgraph Master ["🖥️ Master Node (主節點)"]
-        NN["NameNode<br/>(HDFS 元數據管理 & FsImage 合併)"]
-        RM["ResourceManager<br/>(YARN 任務調度與資源分配)"]
-        SNN["Secondary NameNode"]
-    end
-
-    subgraph Worker ["💻 Data1 Node (工作節點)"]
-        DN["DataNode<br/>(HDFS 數據塊區塊存儲)"]
-        NM["NodeManager<br/>(MapReduce 容器運行與回報)"]
-    end
-
-    Input[("📄 原始推文數據<br/>CSV Dataset")] --> NN
-    NN -->|"區塊分割與映射"| DN
-    RM -->|"分派 Map / Reduce 任務"| NM
-    NM -->|"平行分散處理"| Output[("📊 聚合統計結果<br/>502 維度特徵輸出")]
-
-    classDef default fill:#FFFFFF,stroke:#CAD5E2,stroke-width:1.2px,color:#2D3748,rx:8px,ry:8px;
-    classDef highlight fill:#EBF3FB,stroke:#3B82F6,stroke-width:1.8px,color:#1E3A8A,rx:8px,ry:8px;
-    classDef nodeBox fill:#F8FAFC,stroke:#475569,stroke-width:1.5px,color:#0F172A,rx:10px,ry:10px;
-
-    class Master,Worker nodeBox;
-    class Output highlight;
-```
+<img width="951" height="331" alt="截圖 2026-10-12 下午4 31 11" src="https://github.com/user-attachments/assets/b670d8fc-3fc8-4e58-a4ef-fc5c6639aa51" />
 
 ---
 
